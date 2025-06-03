@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global AI Demand by Region 2025-2030</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+            color: #ffffff;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #00d4ff, #00ff88, #ffd93d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #a0a0b0;
+            font-size: 1.3em;
+            margin-bottom: 40px;
+        }
+        
+        /* Regional sections grid */
+        .regions-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .region-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .region-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .region-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .region-flag {
+            font-size: 40px;
+        }
+        
+        .region-name {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .region-share {
+            font-size: 18px;
+            color: #00d4ff;
+            margin-top: 5px;
+        }
+        
+        /* Regional color themes */
+        .north-america {
+            border: 2px solid #4ecdc4;
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.1), transparent);
+        }
+        
+        .asia-pacific {
+            border: 2px solid #ff6b6b;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), transparent);
+        }
+        
+        .europe {
+            border: 2px solid #ffd93d;
+            background: linear-gradient(135deg, rgba(255, 217, 61, 0.1), transparent);
+        }
+        
+        /* Mini chart for each region */
+        .mini-chart {
+            height: 200px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+            padding: 15px;
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .chart-bar {
+            position: absolute;
+            bottom: 15px;
+            width: 30px;
+            background: linear-gradient(to top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.6));
+            border-radius: 5px 5px 0 0;
+            transition: all 0.3s ease;
+        }
+        
+        .chart-bar:hover {
+            opacity: 0.8;
+        }
+        
+        .bar-label {
+            position: absolute;
+            bottom: -20px;
+            font-size: 11px;
+            width: 30px;
+            text-align: center;
+        }
+        
+        .bar-value {
+            position: absolute;
+            top: -20px;
+            font-size: 10px;
+            width: 40px;
+            text-align: center;
+            left: -5px;
+        }
+        
+        /* Key insights for each region */
+        .region-insights {
+            margin-top: 20px;
+        }
+        
+        .insight-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+        
+        .insight-icon {
+            font-size: 20px;
+        }
+        
+        .insight-text {
+            font-size: 14px;
+            color: #d0d0e0;
+        }
+        
+        .insight-value {
+            font-weight: 700;
+            color: #00ff88;
+        }
+        
+        /* Global comparison chart */
+        .global-chart {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            height: 400px;
+            position: relative;
+        }
+        
+        .stacked-bar {
+            position: absolute;
+            bottom: 30px;
+            width: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .stack-segment {
+            width: 100%;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .stack-segment:hover {
+            opacity: 0.8;
+        }
+        
+        .year-label {
+            position: absolute;
+            bottom: -25px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .total-value {
+            position: absolute;
+            top: -25px;
+            font-size: 16px;
+            font-weight: 700;
+            color: #00ff88;
+        }
+        
+        /* Legend */
+        .global-legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        
+        /* Market totals */
+        .market-totals {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .total-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .total-title {
+            font-size: 16px;
+            color: #a0a0b0;
+            margin-bottom: 10px;
+        }
+        
+        .total-amount {
+            font-size: 32px;
+            font-weight: 800;
+            background: linear-gradient(45deg, #00ff88, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .total-growth {
+            font-size: 14px;
+            color: #00ff88;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Global AI Market Demand by Region 2025-2030</h1>
+        <p class="subtitle">Regional Distribution and Growth Trajectories</p>
+        
+        <!-- Regional Cards Grid -->
+        <div class="regions-grid">
+            <!-- North America -->
+            <div class="region-card north-america">
+                <div class="region-header">
+                    <div class="region-flag">🇺🇸</div>
+                    <div>
+                        <div class="region-name">North America</div>
+                        <div class="region-share">37-40% Global Share</div>
+                    </div>
+                </div>
+                
+                <div class="mini-chart">
+                    <div class="chart-bar" style="left: 10px; height: 40%; background: #4ecdc4;">
+                        <div class="bar-value">$255B</div>
+                        <div class="bar-label">2025</div>
+                    </div>
+                    <div class="chart-bar" style="left: 50px; height: 55%; background: #4ecdc4;">
+                        <div class="bar-value">$352B</div>
+                        <div class="bar-label">2027</div>
+                    </div>
+                    <div class="chart-bar" style="left: 90px; height: 70%; background: #4ecdc4;">
+                        <div class="bar-value">$488B</div>
+                        <div class="bar-label">2029</div>
+                    </div>
+                    <div class="chart-bar" style="left: 130px; height: 85%; background: #4ecdc4;">
+                        <div class="bar-value">$586B</div>
+                        <div class="bar-label">2030</div>
+                    </div>
+                </div>
+                
+                <div class="region-insights">
+                    <div class="insight-item">
+                        <span class="insight-icon">🏢</span>
+                        <span class="insight-text">Enterprise AI adoption: <span class="insight-value">60%</span> (5000+ employees)</span>
+                    </div>
+                    <div class="insight-item">
+                        <span class="insight-icon">🤖</span>
+                        <span class="insight-text">AI Agents market leader: <span class="insight-value">38%</span> share</span>
+                    </div>
+                    <div class="insight-item">
+                        <span class="insight-icon">💡</span>
+                        <span class="insight-text">Focus: ML platforms & advanced analytics</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Asia Pacific -->
+            <div class="region-card asia-pacific">
+                <div class="region-header">
+                    <div class="region-flag">🌏</div>
+                    <div>
+                        <div class="region-name">Asia Pacific</div>
+                        <div class="region-share">35-40% by 2030</div>
+                    </div>
+                </div>
+                
+                <div class="mini-chart">
+                    <div class="chart-bar" style="left: 10px; height: 35%; background: #ff6b6b;">
+                        <div class="bar-value">$241B</div>
+                        <div class="bar-label">2025</div>
+                    </div>
+                    <div class="chart-bar" style="left: 50px; height: 50%; background: #ff6b6b;">
+                        <div class="bar-value">$345B</div>
+                        <div class="bar-label">2027</div>
+                    </div>
+                    <div class="chart-bar" style="left: 90px; height: 70%; background: #ff6b6b;">
+                        <div class="bar-value">$492B</div>
+                        <div class="bar-label">2029</div>
+                    </div>
+                    <div class="chart-bar" style="left: 130px; height: 90%; background: #ff6b6b;">
+                        <div class="bar-value">$632B</div>
+                        <div class="bar-label">2030</div>
+                    </div>
+                </div>
+                
+                <div class="region-insights">
+                    <div class="insight-item">
+                        <span class="insight-icon">🚀</span>
+                        <span class="insight-text">Fastest growing region: <span class="insight-value">300%</span> robotics growth</span>
+                    </div>
+                    <div class="insight-item">
+                        <span class="insight-icon">🏭</span>
+                        <span class="insight-text">China AI market: <span class="insight-value">$34.2B</span> (2024)</span>
+                    </div>
+                    <div class="insight-item">
+                        <span class="insight-icon">🔧</span>
+                        <span class="insight-text">Focus: Manufacturing, automation, robotics</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Europe -->
+            <div class="region-card europe">
+                <div class="region-header">
+                    <div class="region-flag">🇪🇺</div>
+                    <div>
+                        <div class="region-name">Europe</div>
+                        <div class="region-share">25-28% Global Share</div>
+                    </div>
+                </div>
+                
+                <div class="mini-chart">
+                    <div class="chart-bar" style="left: 10px; height: 30%; background: #ffd93d;">
+                        <div class="bar-value">$173B</div>
+                        <div class="bar-label">2025</div>
+                    </div>
+                    <div class="chart-bar" style="left: 50px; height: 45%; background: #ffd93d;">
+                        <div class="bar-value">$258B</div>
+                        <div class="bar-label">2027</div>
+                    </div>
+                    <div class="chart-bar" style="left: 90px; height: 60%; background: #ffd93d;">
+                        <div class="bar-value">$346B</div>
+                        <div class="bar-label">2029</div>
+                    </div>
+                    <div class="chart-bar" style="left: 130px; height: 75%; background: #ffd93d;">
+                        <div class="bar-value">$440B</div>
+                        <div class="bar-label">2030</div>
+                    </div>
+                </div>
+                
+                <div class="region-insights">
+                    <div class="insight-item">
+                        <span class="insight-icon">📜</span>
+                        <span class="insight-text">EU AI Act: Leading regulation</span>
+                    </div>
+                    <div class="insight-item">
+                        <span class="insight-icon">💶</span>
+                        <span class="insight-text">AI investment plan: <span class="insight-value">€225B</span></span>
+                    </div>
+                    <div class="insight-item">
+                        <span class="insight-icon">🛡️</span>
+                        <span class="insight-text">Focus: Ethical AI, data protection</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Global Comparison Chart -->
+        <div class="global-chart">
+            <h2 style="text-align: center; color: #00d4ff; margin-bottom: 30px;">Total AI Market by Region (in Billions USD)</h2>
+            
+            <!-- Stacked bars for each year -->
+            <div class="stacked-bar" style="left: 10%;">
+                <div class="total-value">$690B</div>
+                <div class="stack-segment" style="height: 60px; background: #4ecdc4;">$255B</div>
+                <div class="stack-segment" style="height: 55px; background: #ff6b6b;">$241B</div>
+                <div class="stack-segment" style="height: 40px; background: #ffd93d;">$173B</div>
+                <div class="stack-segment" style="height: 15px; background: #a8e6cf;">$21B</div>
+                <div class="year-label">2025</div>
+            </div>
+            
+            <div class="stacked-bar" style="left: 30%;">
+                <div class="total-value">$1,140B</div>
+                <div class="stack-segment" style="height: 85px; background: #4ecdc4;">$410B</div>
+                <div class="stack-segment" style="height: 80px; background: #ff6b6b;">$385B</div>
+                <div class="stack-segment" style="height: 60px; background: #ffd93d;">$290B</div>
+                <div class="stack-segment" style="height: 25px; background: #a8e6cf;">$55B</div>
+                <div class="year-label">2027</div>
+            </div>
+            
+            <div class="stacked-bar" style="left: 50%;">
+                <div class="total-value">$1,890B</div>
+                <div class="stack-segment" style="height: 110px; background: #4ecdc4;">$680B</div>
+                <div class="stack-segment" style="height: 105px; background: #ff6b6b;">$645B</div>
+                <div class="stack-segment" style="height: 85px; background: #ffd93d;">$470B</div>
+                <div class="stack-segment" style="height: 35px; background: #a8e6cf;">$95B</div>
+                <div class="year-label">2029</div>
+            </div>
+            
+            <div class="stacked-bar" style="left: 70%;">
+                <div class="total-value">$2,930B</div>
+                <div class="stack-segment" style="height: 130px; background: #4ecdc4;">$1,086B</div>
+                <div class="stack-segment" style="height: 140px; background: #ff6b6b;">$1,172B</div>
+                <div class="stack-segment" style="height: 100px; background: #ffd93d;">$525B</div>
+                <div class="stack-segment" style="height: 40px; background: #a8e6cf;">$147B</div>
+                <div class="year-label">2030</div>
+            </div>
+        </div>
+        
+        <div class="global-legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background: #4ecdc4;"></div>
+                <span>North America</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #ff6b6b;"></div>
+                <span>Asia Pacific</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #ffd93d;"></div>
+                <span>Europe</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #a8e6cf;"></div>
+                <span>Rest of World</span>
+            </div>
+        </div>
+        
+        <!-- Market Totals -->
+        <div class="market-totals">
+            <div class="total-card">
+                <div class="total-title">Global AI Market 2025</div>
+                <div class="total-amount">$690B</div>
+                <div class="total-growth">Base Year</div>
+            </div>
+            <div class="total-card">
+                <div class="total-title">Global AI Market 2030</div>
+                <div class="total-amount">$2.93T</div>
+                <div class="total-growth">326% Growth</div>
+            </div>
+            <div class="total-card">
+                <div class="total-title">Overall CAGR</div>
+                <div class="total-amount">33.4%</div>
+                <div class="total-growth">2025-2030</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

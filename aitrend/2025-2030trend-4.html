@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New AI Inventions in Asia Pacific 2025-2030</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a0f1f 0%, #2a1a3e 100%);
+            color: #ffffff;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1500px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #a0a0b0;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+        }
+        
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 800px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            padding: 40px 60px 60px 80px;
+            margin-bottom: 40px;
+            border: 2px solid rgba(255, 107, 107, 0.3);
+        }
+        
+        .chart-area {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, 
+                rgba(255, 107, 107, 0.05) 0%, 
+                rgba(255, 217, 61, 0.02) 50%, 
+                rgba(255, 255, 255, 0.01) 100%);
+            border-radius: 10px;
+        }
+        
+        /* Grid lines */
+        .grid-line-h {
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            left: 0;
+        }
+        
+        .grid-line-v {
+            position: absolute;
+            width: 1px;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            top: 0;
+        }
+        
+        /* Axes */
+        .x-axis {
+            position: absolute;
+            bottom: -40px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        
+        .x-label {
+            font-size: 14px;
+            color: #a0a0b0;
+            font-weight: 600;
+        }
+        
+        .y-axis {
+            position: absolute;
+            left: -70px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .y-label {
+            font-size: 12px;
+            color: #a0a0b0;
+            font-weight: 600;
+            text-align: right;
+        }
+        
+        /* AI Invention Bubbles */
+        .invention {
+            position: absolute;
+            border-radius: 15px;
+            padding: 12px 16px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            min-width: 140px;
+        }
+        
+        .invention:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            z-index: 20;
+        }
+        
+        .invention-name {
+            font-size: 14px;
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
+        
+        .invention-details {
+            font-size: 11px;
+            opacity: 0.85;
+            font-weight: 400;
+        }
+        
+        .market-value {
+            font-size: 13px;
+            margin-top: 4px;
+            font-weight: 700;
+        }
+        
+        /* Country-specific colors */
+        .china {
+            background: linear-gradient(135deg, #ff4757, #ff6348);
+            color: #ffffff;
+        }
+        
+        .japan {
+            background: linear-gradient(135deg, #3c40c6, #575fcf);
+            color: #ffffff;
+        }
+        
+        .india {
+            background: linear-gradient(135deg, #ffa502, #ff7675);
+            color: #ffffff;
+        }
+        
+        .korea {
+            background: linear-gradient(135deg, #0fbcf9, #4bcffa);
+            color: #ffffff;
+        }
+        
+        .sea {
+            background: linear-gradient(135deg, #05c46b, #00d2d3);
+            color: #ffffff;
+        }
+        
+        .regional {
+            background: linear-gradient(135deg, #ffd32a, #ffb142);
+            color: #1a1a2e;
+        }
+        
+        /* Growth arrows */
+        .growth-arrow {
+            position: absolute;
+            stroke: rgba(255, 255, 255, 0.3);
+            stroke-width: 2;
+            fill: none;
+            stroke-dasharray: 5,5;
+            marker-end: url(#arrowhead);
+        }
+        
+        /* Country flags */
+        .country-flag {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0.8;
+        }
+        
+        /* Legend */
+        .legend {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 5px;
+        }
+        
+        .legend-text {
+            font-size: 13px;
+            color: #d0d0e0;
+        }
+        
+        /* Market insights */
+        .insights {
+            margin-top: 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+        }
+        
+        .insight-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .insight-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .insight-title {
+            font-size: 16px;
+            color: #ff6b6b;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .insight-value {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(45deg, #ffd93d, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .insight-desc {
+            font-size: 13px;
+            color: #a0a0b0;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>New AI Inventions in Asia Pacific 2025-2030</h1>
+        <p class="subtitle">Innovation Timeline and Market Value Projections</p>
+        
+        <div class="chart-container">
+            <div class="chart-area">
+                <!-- Grid lines -->
+                <div class="grid-line-h" style="bottom: 10%"></div>
+                <div class="grid-line-h" style="bottom: 20%"></div>
+                <div class="grid-line-h" style="bottom: 30%"></div>
+                <div class="grid-line-h" style="bottom: 40%"></div>
+                <div class="grid-line-h" style="bottom: 50%"></div>
+                <div class="grid-line-h" style="bottom: 60%"></div>
+                <div class="grid-line-h" style="bottom: 70%"></div>
+                <div class="grid-line-h" style="bottom: 80%"></div>
+                <div class="grid-line-h" style="bottom: 90%"></div>
+                
+                <div class="grid-line-v" style="left: 0"></div>
+                <div class="grid-line-v" style="left: 16.67%"></div>
+                <div class="grid-line-v" style="left: 33.33%"></div>
+                <div class="grid-line-v" style="left: 50%"></div>
+                <div class="grid-line-v" style="left: 66.67%"></div>
+                <div class="grid-line-v" style="left: 83.33%"></div>
+                <div class="grid-line-v" style="left: 100%"></div>
+                
+                <!-- Country indicators -->
+                <div class="country-flag" style="left: 10px; top: 10px">🇨🇳 China</div>
+                <div class="country-flag" style="left: 150px; top: 10px">🇯🇵 Japan</div>
+                <div class="country-flag" style="left: 290px; top: 10px">🇮🇳 India</div>
+                <div class="country-flag" style="left: 430px; top: 10px">🇰🇷 Korea</div>
+                <div class="country-flag" style="left: 570px; top: 10px">🇸🇬 SEA</div>
+                <div class="country-flag" style="left: 710px; top: 10px">🌏 Regional</div>
+                
+                <!-- 2025 Inventions -->
+                <div class="invention china" style="left: 5%; bottom: 25%; width: 160px;">
+                    <div class="invention-name">🇨🇳 Industrial Robotics</div>
+                    <div class="invention-details">Smart Factory Automation</div>
+                    <div class="market-value">$12.8B</div>
+                </div>
+                
+                <div class="invention japan" style="left: 8%; bottom: 18%; width: 150px;">
+                    <div class="invention-name">🇯🇵 Service Robots</div>
+                    <div class="invention-details">Healthcare & Hospitality</div>
+                    <div class="market-value">$8.6B</div>
+                </div>
+                
+                <div class="invention india" style="left: 3%; bottom: 45%; width: 170px;">
+                    <div class="invention-name">🇮🇳 AI Infrastructure</div>
+                    <div class="invention-details">Cloud Platforms</div>
+                    <div class="market-value">$45.2B</div>
+                </div>
+                
+                <div class="invention korea" style="left: 10%; bottom: 28%; width: 150px;">
+                    <div class="invention-name">🇰🇷 AI + 5G Systems</div>
+                    <div class="invention-details">Edge Computing</div>
+                    <div class="market-value">$15.8B</div>
+                </div>
+                
+                <div class="invention sea" style="left: 5%; bottom: 15%; width: 160px;">
+                    <div class="invention-name">🇸🇬 AI Service Agents</div>
+                    <div class="invention-details">Customer Support</div>
+                    <div class="market-value">$6.3B</div>
+                </div>
+                
+                <!-- 2026-2027 Inventions -->
+                <div class="invention regional" style="left: 25%; bottom: 32%; width: 170px;">
+                    <div class="invention-name">Smart Cities AI</div>
+                    <div class="invention-details">Urban Management</div>
+                    <div class="market-value">$22.4B</div>
+                </div>
+                
+                <!-- 2028-2029 Inventions -->
+                <div class="invention china" style="left: 50%; bottom: 40%; width: 180px;">
+                    <div class="invention-name">🇨🇳 Dark Factory OS</div>
+                    <div class="invention-details">Autonomous Production</div>
+                    <div class="market-value">$28.5B</div>
+                </div>
+                
+                <div class="invention japan" style="left: 55%; bottom: 35%; width: 170px;">
+                    <div class="invention-name">🇯🇵 Precision Vision AI</div>
+                    <div class="invention-details">99.9% QC Accuracy</div>
+                    <div class="market-value">$24.2B</div>
+                </div>
+                
+                <!-- 2030 Inventions -->
+                <div class="invention china" style="left: 80%; bottom: 42%; width: 190px;">
+                    <div class="invention-name">🇨🇳 Smart Manufacturing</div>
+                    <div class="invention-details">Self-Optimizing Systems</div>
+                    <div class="market-value">$38.4B</div>
+                </div>
+                
+                <div class="invention japan" style="left: 85%; bottom: 36%; width: 180px;">
+                    <div class="invention-name">🇯🇵 Advanced Vision AI</div>
+                    <div class="invention-details">Robotic Integration</div>
+                    <div class="market-value">$28.5B</div>
+                </div>
+                
+                <div class="invention india" style="left: 75%; bottom: 70%; width: 180px;">
+                    <div class="invention-name">🇮🇳 Enterprise AI Suite</div>
+                    <div class="invention-details">Complete IT Transform</div>
+                    <div class="market-value">$82.3B</div>
+                </div>
+                
+                <div class="invention korea" style="left: 82%; bottom: 33%; width: 170px;">
+                    <div class="invention-name">🇰🇷 AI Security Suite</div>
+                    <div class="invention-details">Quantum-Resistant</div>
+                    <div class="market-value">$24.6B</div>
+                </div>
+                
+                <div class="invention sea" style="left: 78%; bottom: 30%; width: 170px;">
+                    <div class="invention-name">Industry 4.0 AI</div>
+                    <div class="invention-details">SME Automation</div>
+                    <div class="market-value">$18.9B</div>
+                </div>
+                
+                <div class="invention regional" style="left: 83%; bottom: 48%; width: 180px;">
+                    <div class="invention-name">Multilingual NLP</div>
+                    <div class="invention-details">50+ Asian Languages</div>
+                    <div class="market-value">$45.8B</div>
+                </div>
+                
+                <!-- Growth arrows showing evolution -->
+                <svg width="100%" height="100%" style="position: absolute; top: 0; left: 0;">
+                    <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="rgba(255, 255, 255, 0.5)" />
+                        </marker>
+                    </defs>
+                    <!-- China robotics evolution -->
+                    <path class="growth-arrow" d="M 100 500 Q 400 450 750 420" />
+                    <!-- India infrastructure to services -->
+                    <path class="growth-arrow" d="M 80 350 Q 400 250 700 200" />
+                    <!-- Japan service to vision -->
+                    <path class="growth-arrow" d="M 120 520 Q 400 400 780 380" />
+                </svg>
+                
+                <!-- Axes -->
+                <div class="x-axis">
+                    <span class="x-label">2025</span>
+                    <span class="x-label">2026</span>
+                    <span class="x-label">2027</span>
+                    <span class="x-label">2028</span>
+                    <span class="x-label">2029</span>
+                    <span class="x-label">2030</span>
+                </div>
+                
+                <div class="y-axis">
+                    <span class="y-label">$90B</span>
+                    <span class="y-label">$80B</span>
+                    <span class="y-label">$70B</span>
+                    <span class="y-label">$60B</span>
+                    <span class="y-label">$50B</span>
+                    <span class="y-label">$40B</span>
+                    <span class="y-label">$30B</span>
+                    <span class="y-label">$20B</span>
+                    <span class="y-label">$10B</span>
+                    <span class="y-label">$0</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color china"></div>
+                <span class="legend-text">China</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color japan"></div>
+                <span class="legend-text">Japan</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color india"></div>
+                <span class="legend-text">India</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color korea"></div>
+                <span class="legend-text">South Korea</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color sea"></div>
+                <span class="legend-text">Southeast Asia</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color regional"></div>
+                <span class="legend-text">Pan-Regional</span>
+            </div>
+        </div>
+        
+        <div class="insights">
+            <h2 style="color: #ff6b6b;">Key Innovation Insights</h2>
+            <div class="insight-grid">
+                <div class="insight-card">
+                    <div class="insight-title">Largest Innovation</div>
+                    <div class="insight-value">$82.3B</div>
+                    <div class="insight-desc">India's Enterprise AI Suite (2030)</div>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-title">Fastest Growth</div>
+                    <div class="insight-value">300%</div>
+                    <div class="insight-desc">China's Manufacturing AI</div>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-title">Total New Markets</div>
+                    <div class="insight-value">$428.5B</div>
+                    <div class="insight-desc">Combined value by 2030</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
